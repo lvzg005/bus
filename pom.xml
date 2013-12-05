@@ -52,12 +52,14 @@
 		<asm.version>3.3.1</asm.version>
 		<cglib.version>2.2.2</cglib.version>
 		<jstl.version>1.2</jstl.version>
+		<packtag.version>3.8</packtag.version>
+		<yahoo.yui.version>2.4.7</yahoo.yui.version>
 		<javacsv.version>2.0</javacsv.version>
 		<jcaptcha.version>1.0-RC6</jcaptcha.version>
 		<!-- JDBC Driver -->
-		<jdbc.driver.groupId>com.oracle</jdbc.driver.groupId>
-		<jdbc.driver.artifactId>ojdbc14</jdbc.driver.artifactId>
-		<jdbc.driver.version>10.2.0.4.0</jdbc.driver.version>
+		<jdbc.driver.groupId>mysql</jdbc.driver.groupId>
+		<jdbc.driver.artifactId>mysql-connector-java</jdbc.driver.artifactId>
+		<jdbc.driver.version>5.1.13</jdbc.driver.version>
 		<!-- servlet & jsp -->
 		<servlet.version>2.5</servlet.version>
 		<jsp.version>2.2</jsp.version>

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.company.bus.loaned.dbaccess.dao.SampleDao">
+	<!-- CRUD part -->
+	
+	<!-- 定义resultMap -->
+	<resultMap id="sampleAccountMap"
+		type="com.company.bus.loaned.dbaccess.entity.SampleAccount">
+		<id column="USERID" property="userId" />
+		<result column="REALNAME" property="realName" />
+		<result column="USERNAME" property="userName" />
+		<result column="USERPASSWORD" property="userPassword" />
+		<result column="BIRTHDAY" property="birthday" />
+		<result column="GENDER" property="gender" />
+		<result column="CELLPHONE" property="cellphone" />
+		<result column="EMAILADDR" property="emailAddr" />
+	</resultMap>
+	
+	<sql id="SampleAccount_Column_List">
+		USERID,USERNAME,REALNAME,USERPASSWORD,BIRTHDAY,GENDER,CELLPHONE,EMAILADDR
+	</sql>
+
+	<!-- 插入记录 -->
+	<insert id="accInsert" parameterType="com.company.bus.loaned.dbaccess.entity.SampleAccount">	
+			INSERT INTO SAMPLE_ACCOUNT(<include refid="SampleAccount_Column_List" />)
+    		VALUES(#{userId}, #{userName}, #{realName}, #{userPassword}, #{birthday}, #{gender}, #{cellphone}, #{emailAddr})
+	</insert>
+
+	<!-- 更新记录 -->
+	<update id="accUpdate" parameterType="com.company.bus.loaned.dbaccess.entity.SampleAccount">
+		<![CDATA[	
+			UPDATE SAMPLE_ACCOUNT SET 
+				USERNAME=#{userName},
+				USERPASSWORD=#{userPassword},
+				REALNAME=#{realName},
+				BIRTHDAY=#{birthday},
+				GENDER=#{gender},
+				CELLPHONE=#{cellphone},
+				EMAILADDR=#{emailAddr} 
+			WHERE 
+				USERID=#{userId}
+		]]>
+	</update>
+
+	<!-- 删除记录 -->
+	<delete id="accDelete" parameterType="string">
+		<![CDATA[
+			DELETE FROM SAMPLE_ACCOUNT 
+			WHERE USERID=#{userId}
+		]]>
+	</delete>
+
+
+	<!-- 查询分页记录 -->
+	<select id="accQueryPaged" parameterType="map" resultMap="sampleAccountMap">
+		<![CDATA[
+			SELECT * FROM(
+        		SELECT 
+        			NESTED.*, ROWNUM RN FROM (
+        				SELECT * FROM SAMPLE_ACCOUNT ]]>
+		<trim prefix="where" prefixOverrides="AND|OR">
+			<if test="userName != null and !''.equals(userName)">
+				AND userName LIKE '%'||#{userName}||'%'
+			</if>
+			<if test="realName != null and !''.equals(realName)">
+				AND realName LIKE '%'||#{realName}||'%'
+			</if>
+		</trim>
+        			<![CDATA[) NESTED 
+        		WHERE ROWNUM <= #{page.pageLimit}*#{page.pageStart}
+			) WHERE RN > (#{page.pageStart}-1)*#{page.pageLimit}
+		]]>
+	</select>
+
+	<!-- 查询记录总数 -->
+	<select id="accQueryTotalCount" resultType="int" parameterType="map">
+		<![CDATA[
+			SELECT COUNT(1) FROM SAMPLE_ACCOUNT 
+		]]>
+		<trim prefix="where" prefixOverrides="AND|OR">
+			<if test="userName != null and !''.equals(userName)">
+				AND userName LIKE '%'||#{userName}||'%'
+			</if>
+			<if test="realName != null and !''.equals(realName)">
+				AND realName LIKE '%'||#{realName}||'%'
+			</if>
+		</trim>
+	</select>
+	
+	<!-- 通过主键查询记录 -->
+	<select id="accQueryById" resultMap="sampleAccountMap" parameterType="string">
+		SELECT 
+		<include refid="SampleAccount_Column_List" /> 
+		FROM 
+		SAMPLE_ACCOUNT 
+		WHERE 
+		USERID=#{id}
+	</select>
+	
+	<!-- RESTful part -->
+	<resultMap id="SampleResultMap" type="com.company.bus.loaned.dbaccess.entity.Sample">
+		<id column="ID" property="id" jdbcType="VARCHAR" />
+		<result column="FIELD1" property="field1" jdbcType="VARCHAR" />
+		<result column="FIELD2" property="field2" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<sql id="Sample_Column_List">
+		ID,
+		FIELD1,
+		FIELD2
+	</sql>
+
+	<select id="selectByPrimaryKey" parameterType="string"
+		resultMap="SampleResultMap">
+		SELECT
+		<include refid="Sample_Column_List" />
+		FROM
+		SAMPLE
+		WHERE
+		ID = #{id}
+	</select>
+
+	<insert id="insert" parameterType="com.company.bus.loaned.dbaccess.entity.Sample">
+		INSERT INTO SAMPLE (
+		<include refid="Sample_Column_List" />
+		)
+		VALUES(
+		#{id,jdbcType=VARCHAR},
+		#{field1,jdbcType=VARCHAR},
+		#{field2,jdbcType=VARCHAR}
+		)
+	</insert>
+</mapper>
