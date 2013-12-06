@@ -15,7 +15,7 @@
    <!-- 查询分页记录 -->
   <select id="queryPaged" parameterType="map" resultMap="BaseResultMap">
 		<![CDATA[
-			SELECT * FROM(
+			
         		SELECT NESTED.*, ROWNUM RN FROM (
 							SELECT  * FROM(
 							SELECT
@@ -58,8 +58,8 @@
 								</if>
 							</trim>
 				<![CDATA[) NESTED 
-        		WHERE ROWNUM <= #{page.pageLimit}*#{page.pageStart}
-			) WHERE RN > (#{page.pageStart}-1)*#{page.pageLimit}
+        		LIMIT #{page.startRecord}, #{page.pageLimit}
+			
 		]]>
    </select>
    

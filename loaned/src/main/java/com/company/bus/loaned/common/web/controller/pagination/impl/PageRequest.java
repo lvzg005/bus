@@ -13,6 +13,7 @@ public class PageRequest implements Pageable {
 	public PageRequest(Integer start, Integer limit){
 		this.start = start;
 		this.limit = limit;
+		this.startRecord = (start - 1) * limit;
 	}
 	
 
@@ -40,5 +41,16 @@ public class PageRequest implements Pageable {
 	private Integer start;
 	//单页总量
 	private Integer limit;
+	//起始记录
+	private Integer startRecord;
+	
+	public Integer getStartRecord() {
+		return startRecord;
+	}
+
+
+	public void setStartRecord(Integer startRecord) {
+		this.startRecord = startRecord;
+	}
 	
 }

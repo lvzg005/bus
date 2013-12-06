@@ -15,7 +15,7 @@
 		<div class="navbar">
 			<div class="navbar-inner">
 				<div class="container">
-					<img alt="" src="images/logo/ips_chn.png"
+					<img alt="" src="images/logo/Hydrangeas.jpg"
 						style="height: 45px; padding-top: 5px; padding-bottom: 5px;">
 				</div>
 			</div>
@@ -33,7 +33,7 @@
 		<div class="navbar">
 			<div class="navbar-inner">
 				<div class="container">
-					<img alt="" src="images/logo/ips_chn.png"
+					<img alt="" src="images/logo/Hydrangeas.jpg"
 						style="height: 45px; padding-top: 5px; padding-bottom: 5px;">
 				</div>
 			</div>

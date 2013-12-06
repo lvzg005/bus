@@ -16,8 +16,7 @@
    <!-- 查询分页记录 -->
   <select id="queryPaged" parameterType="map" resultMap="BaseResultMap">
 		<![CDATA[
-			SELECT * FROM(
-        		SELECT NESTED.*, ROWNUM RN FROM (
+        		SELECT NESTED.* FROM (
         				SELECT G.RGROUP_ID,G.RGROUP_NAME,U.USER_ID,U.USERNAME ,U.STATUS,U.PASSWORD
         				FROM SET_ROLE_GROUP G , SET_USER U, SET_USER_RGROUP UR 
         				WHERE G.RGROUP_ID = UR.RGROUP_ID AND U.USER_ID = UR.USER_ID ]]>
@@ -25,10 +24,9 @@
 						AND U.USERNAME LIKE '%'||#{userName}||'%'
 					</if>
 					ORDER BY U.USER_ID DESC
-				<![CDATA[) NESTED 
-        		WHERE ROWNUM <= #{page.pageLimit}*#{page.pageStart}
-			) WHERE RN > (#{page.pageStart}-1)*#{page.pageLimit}
-		]]>
+				) NESTED 
+        		 LIMIT #{page.startRecord}, #{page.pageLimit}
+				
    </select>
    
    <!-- 查询记录总数 -->

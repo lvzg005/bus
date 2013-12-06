@@ -28,7 +28,7 @@
 <div class="navbar navbar-fixed-bottom" style="background-color: white;">
 <footer class="footer" style="width:100%;">
 	<div class="container" style="width:100%;border-top:1px solid #BCBCBC">
-		<p align="center" style="padding-top:10px;padding-bottom:5px;">Copyright 2000 - 2013 IPS. All Rights Reserved
+		<p align="center" style="padding-top:10px;padding-bottom:5px;">Copyright 2013 - 2013 XXX. All Rights Reserved
 			XXXXXXXX有限公司 版权所有</p>
 	</div>
 </footer>

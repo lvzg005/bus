@@ -3,7 +3,7 @@ package com.company.bus.loaned.msg;
 /**
  * @Description: 错误码(Generated via template)
  * @author: 
- * @date: 2013-12-04
+ * @date: 2013-12-06
  * @version: 1.0
  */
 public class Errors {
